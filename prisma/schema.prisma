@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id           String        @id @default(cuid())
+  source       ProductSource
+  sourceId     String?
+  sourceUrl    String        @unique
+  name         String
+  imageUrl     String?
+  sourcePrice  Int?
+  sellingPrice Int
+  isActive     Boolean       @default(true)
+  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime      @default(now())
+  stock        Int           @default(0)
+  cartItems    CartItem[]
+  orderItems   OrderItem[]
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  sessionId String
+  productId String
+  qty       Int      @default(1)
+  createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id])
+
+  @@unique([sessionId, productId])
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  orderCode    String      @unique
+  customerName String
+  phone        String
+  address      String
+  subtotal     Int
+  total        Int
+  status       OrderStatus @default(WAITING_PAYMENT)
+  createdAt    DateTime    @default(now())
+  invoice      Invoice?
+  items        OrderItem[]
+}
+
+model OrderItem {
+  id            String  @id @default(cuid())
+  orderId       String
+  productId     String
+  nameSnapshot  String
+  priceSnapshot Int
+  qty           Int
+  lineTotal     Int
+  order         Order   @relation(fields: [orderId], references: [id])
+  product       Product @relation(fields: [productId], references: [id])
+}
+
+model Invoice {
+  id          String   @id @default(cuid())
+  orderId     String   @unique
+  invoiceNo   String   @unique
+  bankName    String
+  bankAccount String
+  bankHolder  String
+  total       Int
+  dueDate     DateTime
+  createdAt   DateTime @default(now())
+  order       Order    @relation(fields: [orderId], references: [id])
+}
+
+model Setting {
+  id          String @id @default("singleton")
+  shopName    String
+  supplierWa  String
+  bankName    String
+  bankAccount String
+  bankHolder  String
+  invoicePref String @default("INV")
+}
+
+enum ProductSource {
+  ICHIBOT
+  TOKOPEDIA
+  MANUAL
+}
+
+enum OrderStatus {
+  WAITING_PAYMENT
+  PAID
+  PROCESSING
+  SHIPPED
+  DONE
+  CANCELED
+}

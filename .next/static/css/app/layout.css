@@ -1,0 +1,137 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[3]!./src/app/globals.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************/
+:root {
+  --bg: #0b1220;
+  --text: #e7eefc;
+  --muted: #a8b3c7;
+  --line: rgba(255, 255, 255, 0.1);
+  --primary: #4f8cff;
+  --primary2: #2f6bff;
+  --danger: #ff4d4f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  background:
+    radial-gradient(1200px 600px at 10% 0%, rgba(79,140,255,.22), transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, rgba(47,107,255,.18), transparent 55%),
+    var(--bg);
+  color: var(--text);
+}
+
+.container { max-width: 1200px; margin: 18px auto; padding: 0 16px; }
+.footer { max-width: 1200px; margin: 30px auto; padding: 14px 16px; color: var(--muted); }
+
+h1, h2 { margin: 18px 0 10px; }
+.small { color: var(--muted); font-size: 13px; }
+
+.nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(11, 18, 32, 0.72);
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.brand {
+  font-weight: 900;
+  letter-spacing: .2px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 18px;
+}
+.nav-actions { display: flex; gap: 10px; align-items: center; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+}
+.chip:hover { background: rgba(255,255,255,.07); }
+.chip.danger { border-color: rgba(255,77,79,.35); }
+
+.card {
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-gap: 14px;
+  gap: 14px;
+}
+@media (max-width: 1100px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 820px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
+
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.input, textarea {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+  outline: none;
+}
+.input:focus, textarea:focus { border-color: rgba(79,140,255,.55); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(79,140,255,.45);
+  background: linear-gradient(180deg, var(--primary), var(--primary2));
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 800;
+}
+.btn:hover { filter: brightness(1.05); }
+.btn.secondary{
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+}
+.btn.danger { background: rgba(255,77,79,.12); border-color: rgba(255,77,79,.35); }
+
+/* ✅ INI FIX GAMBAR GEDE */
+.product-img {
+  width: 100%;
+  height: 160px;          /* penting */
+  object-fit: contain;    /* penting */
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.03);
+  padding: 10px;
+}
+
+.price { font-size: 18px; font-weight: 900; margin: 10px 0; }
