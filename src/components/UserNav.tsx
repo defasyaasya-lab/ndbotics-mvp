@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getSessionId } from "@/lib/session";
 
 export default async function UserNav() {
-  const sessionId = getSessionId();
+  const sessionId = await getSessionId();
 
   // hitung jumlah produk unik (jumlah baris cartItem)
   const cartCount = sessionId

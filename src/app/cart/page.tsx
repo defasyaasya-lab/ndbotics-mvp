@@ -8,7 +8,7 @@ import CartQtyInput from "@/components/CartQtyInput";
 const MIN_CHECKOUT = 500_000;
 
 export default async function CartPage() {
-  const sessionId = getSessionId();
+  const sessionId = await getSessionId();
 
   const items = sessionId
     ? await prisma.cartItem.findMany({

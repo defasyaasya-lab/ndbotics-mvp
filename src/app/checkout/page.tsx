@@ -7,7 +7,7 @@ import { getSessionId } from "@/lib/session";
 const MIN_CHECKOUT = 500_000;
 
 export default async function CheckoutPage({ searchParams }: { searchParams?: { err?: string } }) {
-  const sessionId = getSessionId();
+  const sessionId = await getSessionId();
 
   const items = sessionId
     ? await prisma.cartItem.findMany({

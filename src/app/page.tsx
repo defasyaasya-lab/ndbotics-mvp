@@ -2,11 +2,12 @@ import { prisma } from "@/lib/prisma";
 import { formatRupiah } from "@/lib/money";
 
 export default async function Home({
-  searchParams,
+    searchParams,
 }: {
-  searchParams: { q?: string };
+  searchParams: Promise<{ q?: string }>;
 }) {
-  const q = (searchParams?.q || "").trim();
+  const params = await searchParams; // ✅ wajib await
+  const q = (params?.q || "").trim();
 
   const products = await prisma.product.findMany({
     where: {
